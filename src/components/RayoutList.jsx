@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { layout, flexbox, grid, space, color } from 'styled-system'
 
 const List = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, autot);
   ${flexbox}
   ${layout}
   ${grid}
@@ -12,9 +14,7 @@ const List = styled.div`
 
 const RayoutList = (props) => {
   return (
-    <List {...props} display="grid" gridTemplateColumns="minmax(0, auto)">
-      {props.children}
-    </List>
+    <List {...props}>{props.children}</List>
   )
 }
 
