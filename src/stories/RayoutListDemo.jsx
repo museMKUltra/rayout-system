@@ -1,49 +1,68 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { ThemeProvider } from 'styled-components'
+import { spaceGenerator } from '../libraries/space.js'
 import RayoutList from '../components/RayoutList.jsx'
 
+const horizontalAlignMapping = {
+	default: '',
+	left: 'start',
+	center: 'center',
+	right: 'end',
+}
+
+const Div = styled.div`
+	height: 40px;
+	background: darkgray;
+`
+
 export const RayoutListDemo = ({
-  backgroundColor,
-  gap,
-  paddingTop,
-  paddingBottom,
-  paddingLeft,
-  paddingRight,
-  horizontalAlign,
-  ...props
+	base,
+	paddingTop,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	gap,
+	horizontalAlign,
 }) => {
-  return <RayoutList
-    {...props}
-    bg={backgroundColor}
-    gridGap={gap}
-    pt={`${paddingTop}px`}
-    pb={`${paddingBottom}px`}
-    pl={`${paddingLeft}px`}
-    pr={`${paddingRight}px`}
-    justifyContent={horizontalAlign === 'default' ? '' : horizontalAlign}
-  >
-    <div>one</div>
-    <div>two</div>
-    <div>three</div>
-  </RayoutList>
-};
+	const space = spaceGenerator(base)
+
+	return (
+		<ThemeProvider theme={space}>
+			<RayoutList
+				bg="lightgray"
+				gridGap={gap}
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				justifyItems={horizontalAlignMapping[horizontalAlign]}
+			>
+				<Div>one</Div>
+				<Div>two</Div>
+				<Div>three</Div>
+			</RayoutList>
+		</ThemeProvider>
+	)
+}
 
 RayoutListDemo.propTypes = {
-  backgroundColor: PropTypes.string,
-  paddingTop: PropTypes.number,
-  paddingBottom: PropTypes.number,
-  paddingLeft: PropTypes.number,
-  paddingRight: PropTypes.number,
-  gap: PropTypes.number,
-  horizontalAlign: PropTypes.oneOf(['default', 'start', 'center', 'end']),
-};
+	base: PropTypes.number,
+	paddingTop: PropTypes.number,
+	paddingBottom: PropTypes.number,
+	paddingLeft: PropTypes.number,
+	paddingRight: PropTypes.number,
+	gap: PropTypes.number,
+	horizontalAlign: PropTypes.oneOf(['default', 'left', 'center', 'right']),
+}
 
 RayoutListDemo.defaultProps = {
-  backgroundColor: 'white',
-  gap: 0,
-  paddingTop: 0,
-  paddingBottom: 0,
-  paddingLeft: 0,
-  paddingRight: 0,
-  horizontalAlign: 'default',
-};
+	base: 4,
+	gap: 0,
+	paddingTop: 0,
+	paddingBottom: 0,
+	paddingLeft: 0,
+	paddingRight: 0,
+	horizontalAlign: 'default',
+}

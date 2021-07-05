@@ -1,7 +1,6 @@
 import React from 'react'
 import { RayoutListDemo } from './RayoutListDemo.jsx'
 
-
 export default {
 	title: 'Example/RayoutList',
 	component: RayoutListDemo,
