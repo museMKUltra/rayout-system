@@ -1,4 +1,4 @@
-# Prettier + ESLint + Standard
+# Prettier + ESLint
 
 ## Prettier
 
@@ -30,16 +30,21 @@
 ## ESLint
 
 ### Install
-`npm install -D eslint-config-standard`
+`npm install -D eslint`
 
 ### Init
 `npx eslint --init`
-* `To check syntax and find problems`
-* `JavaScript modules (import/export)` (esm)
-* `React`
+* `To check syntax, find problems, and enforce code style` (purpose)
+* `JavaScript modules (import/export)` (type of modules)
+* `React` (framework)
 * `No` (TypeScript)
-* `Node`
-* `JavaScript`
+* `Node` (code run)
+* `Answer questions about your style` (define a style)
+* `JavaScript` (config format)
+* `Tabs` (indentation)
+* `Single` (quotes)
+* `Unix` (line endings)
+* `No` (semicolons)
 * `Yes` (eslint-plugin-react@latest eslint@latest)
 
 ### WebStorm setting
