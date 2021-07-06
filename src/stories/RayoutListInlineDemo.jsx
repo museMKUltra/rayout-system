@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { layout } from 'styled-system'
 import { spaceGenerator } from '../libraries/space.js'
 import RayoutListInline from '../components/RayoutListInline.jsx'

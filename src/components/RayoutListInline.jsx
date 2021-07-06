@@ -6,12 +6,12 @@ function margin(times) {
 	return ({ gapY = 0, gapX = 0 }) => `${times * gapY}px ${times * gapX}px`
 }
 
-const InlineBlock = styled.div`
+const List = styled.div`
 	display: inline-block;
   ${color}
 `
 
-const InlineFlex = styled.div`
+List.Inline = styled.div`
 	display: inline-flex;
 	vertical-align: top;
 	flex-wrap: wrap;
@@ -26,9 +26,9 @@ const InlineFlex = styled.div`
 
 function RayoutListInline(props) {
 	return (
-		<InlineBlock {...props}>
-			<InlineFlex {...props}>{props.children}</InlineFlex>
-		</InlineBlock>
+		<List {...props}>
+			<List.Inline {...props}>{props.children}</List.Inline>
+		</List>
 	)
 }
 
