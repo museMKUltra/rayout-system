@@ -7,6 +7,7 @@ import theme from './configs/theme.js'
 import RayoutFlexRow from './components/RayoutFlexRow.jsx'
 
 const Div = styled.div`
+	background: lightgray;
 	${layout}
 `
 

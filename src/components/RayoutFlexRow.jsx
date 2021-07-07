@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { flexbox, space } from 'styled-system'
+import { color, flexbox, space } from 'styled-system'
 
 const Row = styled.div`
 	display: flex;
+  ${flexbox}
+  ${color}
+  ${space}
 `
 
 const Div = ({ className, children }) => (
@@ -45,7 +48,7 @@ function RayoutFlexRow(props) {
 	const margin = remain ? gap : gap / 2
 
 	return (
-		<Row>
+		<Row {...props}>
 			{left && (
 				<Row.Box className={className} flex="0 0 auto" mr={`${margin}px`}>
 					{left.props.children}
