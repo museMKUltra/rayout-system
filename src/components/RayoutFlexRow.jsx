@@ -15,18 +15,33 @@ Row.Box = styled(Div)`
 	${space}
 `
 
+const getClassName = alignItems => {
+	const validAttrs = ['flex-start', 'center', 'flex-end']
+	const isDefault = !validAttrs.includes(alignItems)
+	return isDefault ? 'content-fill-height' : ''
+}
+
+const childMap = {
+	left: 'Left',
+	remain: 'Remain',
+	right: 'Right',
+}
+
+Object.keys(childMap).forEach(key => {
+	const type = childMap[key]
+	RayoutFlexRow[type] = type
+})
+
 // https://medium.com/@srph/react-imitating-vue-slots-eab8393f96fd
 function RayoutFlexRow(props) {
-	const validAlignItemsAttrs = ['flex-start', 'center', 'flex-end']
-	const isDefault = !validAlignItemsAttrs.includes(props.alignItems)
-	const className = isDefault && 'content-fill-height'
+	const { children, alignItems, gap } = props
+	const findChild = type => children.find(child => child.type === type)
 
-	const { children } = props
-	const left = children.find(child => child.type === 'Left')
-	const remain = children.find(child => child.type === 'Remain')
-	const right = children.find(child => child.type === 'Right')
+	const left = findChild(childMap.left)
+	const remain = findChild(childMap.remain)
+	const right = findChild(childMap.right)
 
-	const gap = 10
+	const className = getClassName(alignItems)
 	const margin = remain ? gap : gap / 2
 
 	return (
@@ -49,9 +64,5 @@ function RayoutFlexRow(props) {
 		</Row>
 	)
 }
-
-RayoutFlexRow.Left = 'Left'
-RayoutFlexRow.Remain = 'Remain'
-RayoutFlexRow.Right = 'Right'
 
 export default RayoutFlexRow

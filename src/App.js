@@ -14,7 +14,7 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<div className="App">
-				<RayoutFlexRow>
+				<RayoutFlexRow gap={10}>
 					<RayoutFlexRow.Left>
 						<Div height={30}>one</Div>
 					</RayoutFlexRow.Left>
