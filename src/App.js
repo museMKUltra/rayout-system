@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { layout } from 'styled-system'
 import theme from './configs/theme.js'
 import RayoutFlexRow from './components/RayoutFlexRow.jsx'
+import RayoutFlexColumn from './components/RayoutFlexColumn.jsx'
 
 const Div = styled.div`
 	background: lightgray;
@@ -26,6 +27,17 @@ function App() {
 						<Div height={50}>three</Div>
 					</RayoutFlexRow.Right>
 				</RayoutFlexRow>
+				<RayoutFlexColumn gap={10} height={200}>
+					<RayoutFlexColumn.Top>
+						<Div height={30}>one</Div>
+					</RayoutFlexColumn.Top>
+					<RayoutFlexColumn.Remain>
+						<Div>two</Div>
+					</RayoutFlexColumn.Remain>
+					<RayoutFlexColumn.Bottom>
+						<Div height={50}>three</Div>
+					</RayoutFlexColumn.Bottom>
+				</RayoutFlexColumn>
 			</div>
 		</ThemeProvider>
 	)
