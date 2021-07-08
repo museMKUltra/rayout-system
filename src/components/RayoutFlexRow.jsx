@@ -4,8 +4,8 @@ import { color, flexbox, space } from 'styled-system'
 
 const Row = styled.div`
 	display: flex;
-  ${flexbox}
-  ${color}
+	${flexbox}
+	${color}
   ${space}
 `
 
@@ -21,7 +21,7 @@ Row.Box = styled(Div)`
 const getClassName = alignItems => {
 	const validAttrs = ['flex-start', 'center', 'flex-end']
 	const isDefault = !validAttrs.includes(alignItems)
-	return isDefault ? 'content-fill-height' : ''
+	return isDefault ? 'content-fill-height' : null
 }
 
 const childMap = {
@@ -38,32 +38,29 @@ Object.keys(childMap).forEach(key => {
 // https://medium.com/@srph/react-imitating-vue-slots-eab8393f96fd
 function RayoutFlexRow(props) {
 	const { children, alignItems, gap } = props
-	const findChild = type => children.find(child => child.type === type)
+	const findChildren = type =>
+		children.find(child => child.type === type)?.props.children
 
-	const left = findChild(childMap.left)
-	const remain = findChild(childMap.remain)
-	const right = findChild(childMap.right)
+	const left = findChildren(childMap.left)
+	const remain = findChildren(childMap.remain)
+	const right = findChildren(childMap.right)
 
 	const className = getClassName(alignItems)
 	const margin = remain ? gap : gap / 2
+	const marginRight = left ? margin : 0
+	const marginLeft = right ? margin : 0
 
 	return (
 		<Row {...props}>
-			{left && (
-				<Row.Box className={className} flex="0 0 auto" mr={`${margin}px`}>
-					{left.props.children}
-				</Row.Box>
-			)}
-			{remain && (
-				<Row.Box className={className} flex="1 1 auto" minWidth={0}>
-					{remain.props.children}
-				</Row.Box>
-			)}
-			{right && (
-				<Row.Box className={className} flex="0 0 auto" ml={`${margin}px`}>
-					{right.props.children}
-				</Row.Box>
-			)}
+			<Row.Box className={className} flex="0 0 auto" mr={`${marginRight}px`}>
+				{left}
+			</Row.Box>
+			<Row.Box className={className} flex="1 1 auto" minWidth={0}>
+				{remain}
+			</Row.Box>
+			<Row.Box className={className} flex="0 0 auto" ml={`${marginLeft}px`}>
+				{right}
+			</Row.Box>
 		</Row>
 	)
 }

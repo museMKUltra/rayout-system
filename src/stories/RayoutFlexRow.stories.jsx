@@ -29,8 +29,9 @@ export default {
 
 const Template = args => <RayoutFlexRowDemo {...args} />
 
-export const RayoutFlexRow = Template.bind({})
-RayoutFlexRow.args = {
+export const LeftRemainRight = Template.bind({})
+
+LeftRemainRight.args = {
 	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
@@ -38,4 +39,43 @@ RayoutFlexRow.args = {
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
+}
+
+export const LeftRemain = Template.bind({})
+
+LeftRemain.args = {
+	base: 4,
+	paddingTop: 5,
+	paddingBottom: 5,
+	paddingLeft: 5,
+	paddingRight: 5,
+	gap: 5,
+	verticalAlign: 'default',
+	doesRightShow: false,
+}
+
+export const RemainRight = Template.bind({})
+
+RemainRight.args = {
+	base: 4,
+	paddingTop: 5,
+	paddingBottom: 5,
+	paddingLeft: 5,
+	paddingRight: 5,
+	gap: 5,
+	verticalAlign: 'default',
+	doesLeftShow: false,
+}
+
+export const LeftRight = Template.bind({})
+
+LeftRight.args = {
+	base: 4,
+	paddingTop: 5,
+	paddingBottom: 5,
+	paddingLeft: 5,
+	paddingRight: 5,
+	gap: 5,
+	verticalAlign: 'default',
+	doesRemainShow: false,
 }
