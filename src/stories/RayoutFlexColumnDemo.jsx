@@ -56,7 +56,7 @@ export const RayoutFlexColumnDemo = ({
 				)}
 				{isBottomVisible && (
 					<RayoutFlexColumn.Bottom>
-						<Div width={120} height={40}>bottom</Div>
+						<Div width={120} height={60}>bottom</Div>
 					</RayoutFlexColumn.Bottom>
 				)}
 			</RayoutFlexColumn>

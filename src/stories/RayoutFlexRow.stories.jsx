@@ -1,5 +1,4 @@
 import React from 'react'
-import '../App.css'
 import { RayoutFlexRowDemo } from './RayoutFlexRowDemo.jsx'
 
 export default {

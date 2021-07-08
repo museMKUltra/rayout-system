@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { color, flexbox, space } from 'styled-system'
+import { contentFillHeight } from '../libraries/css.js'
 
 const Row = styled.div`
 	display: flex;
@@ -16,13 +17,10 @@ const Div = ({ className, children }) => (
 Row.Box = styled(Div)`
 	${flexbox}
 	${space}
+  ${props => !props.isAligning && contentFillHeight}
 `
 
-const getClassName = alignItems => {
-	const validAttrs = ['flex-start', 'center', 'flex-end']
-	const isDefault = !validAttrs.includes(alignItems)
-	return isDefault ? 'content-fill-height' : null
-}
+const alignItemsAttrs = ['flex-start', 'center', 'flex-end']
 
 const childMap = {
 	left: 'Left',
@@ -45,20 +43,20 @@ function RayoutFlexRow(props) {
 	const remain = findChildren(childMap.remain)
 	const right = findChildren(childMap.right)
 
-	const className = getClassName(alignItems)
+	const isAligning = alignItemsAttrs.includes(alignItems)
 	const margin = remain ? gap : gap / 2
 	const marginRight = left ? margin : 0
 	const marginLeft = right ? margin : 0
 
 	return (
 		<Row {...props}>
-			<Row.Box className={className} flex="0 0 auto" mr={`${marginRight}px`}>
+			<Row.Box isAligning={isAligning} flex="0 0 auto" mr={`${marginRight}px`}>
 				{left}
 			</Row.Box>
-			<Row.Box className={className} flex="1 1 auto" minWidth={0}>
+			<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
 				{remain}
 			</Row.Box>
-			<Row.Box className={className} flex="0 0 auto" ml={`${marginLeft}px`}>
+			<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
 				{right}
 			</Row.Box>
 		</Row>
