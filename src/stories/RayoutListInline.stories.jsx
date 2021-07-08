@@ -42,5 +42,5 @@ RayoutListInline.args = {
 	gapY: 5,
 	horizontalAlign: 'default',
 	verticalAlign: 'default',
-	wrap: 'true',
+	wrap: true,
 }

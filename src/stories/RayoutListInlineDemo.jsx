@@ -78,7 +78,7 @@ RayoutListInlineDemo.propTypes = {
 	gapY: PropTypes.number,
 	horizontalAlign: PropTypes.oneOf(['default', 'left', 'center', 'right']),
 	verticalAlign: PropTypes.oneOf(['default', 'top', 'center', 'bottom']),
-	wrap: PropTypes.oneOf(['true', 'false']),
+	wrap: PropTypes.bool,
 }
 
 RayoutListInlineDemo.defaultProps = {
@@ -91,5 +91,5 @@ RayoutListInlineDemo.defaultProps = {
 	gapY: 0,
 	horizontalAlign: 'default',
 	verticalAlign: 'default',
-	wrap: 'true',
+	wrap: true,
 }
