@@ -51,7 +51,7 @@ LeftRemain.args = {
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	doesRightShow: false,
+	isRightVisible: false,
 }
 
 export const RemainRight = Template.bind({})
@@ -64,7 +64,7 @@ RemainRight.args = {
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	doesLeftShow: false,
+	isLeftVisible: false,
 }
 
 export const LeftRight = Template.bind({})
@@ -77,5 +77,5 @@ LeftRight.args = {
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	doesRemainShow: false,
+	isRemainVisible: false,
 }

@@ -25,9 +25,9 @@ export const RayoutFlexColumnDemo = ({
 	paddingRight,
 	gap,
 	horizontalAlign,
-	doesTopShow,
-	doesRemainShow,
-	doesBottomShow,
+	isTopVisible,
+	isRemainVisible,
+	isBottomVisible,
 }) => {
 	const space = spaceGenerator(base)
 
@@ -44,18 +44,17 @@ export const RayoutFlexColumnDemo = ({
 				width={160}
 				height={400}
 			>
-				{doesTopShow && (
+				{isTopVisible && (
 					<RayoutFlexColumn.Top>
 						<Div width={80} height={40}>top</Div>
-						
 					</RayoutFlexColumn.Top>
 				)}
-				{doesRemainShow && (
+				{isRemainVisible && (
 					<RayoutFlexColumn.Remain>
 						<Div>remain</Div>
 					</RayoutFlexColumn.Remain>
 				)}
-				{doesBottomShow && (
+				{isBottomVisible && (
 					<RayoutFlexColumn.Bottom>
 						<Div width={120} height={40}>bottom</Div>
 					</RayoutFlexColumn.Bottom>
@@ -73,9 +72,9 @@ RayoutFlexColumnDemo.propTypes = {
 	paddingRight: PropTypes.number,
 	gap: PropTypes.number,
 	horizontalAlign: PropTypes.oneOf(['default', 'left', 'center', 'right']),
-	doesTopShow: PropTypes.bool,
-	doesRemainShow: PropTypes.bool,
-	doesBottomShow: PropTypes.bool,
+	isTopVisible: PropTypes.bool,
+	isRemainVisible: PropTypes.bool,
+	isBottomVisible: PropTypes.bool,
 }
 
 RayoutFlexColumnDemo.defaultProps = {
@@ -86,7 +85,7 @@ RayoutFlexColumnDemo.defaultProps = {
 	paddingRight: 0,
 	gap: 0,
 	horizontalAlign: 'default',
-	doesTopShow: true,
-	doesRemainShow: true,
-	doesBottomShow: true,
+	isTopVisible: true,
+	isRemainVisible: true,
+	isBottomVisible: true,
 }

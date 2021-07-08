@@ -25,9 +25,9 @@ export const RayoutFlexRowDemo = ({
 	paddingRight,
 	gap,
 	verticalAlign,
-	doesLeftShow,
-	doesRemainShow,
-	doesRightShow,
+	isLeftVisible,
+	isRemainVisible,
+	isRightVisible,
 }) => {
 	const space = spaceGenerator(base)
 
@@ -42,19 +42,19 @@ export const RayoutFlexRowDemo = ({
 				gap={space.space[gap]}
 				alignItems={verticalAlignMapping[verticalAlign]}
 			>
-				{doesLeftShow && (
+				{isLeftVisible && (
 					<RayoutFlexRow.Left>
 						<Div width={100} height={40}>
 							left
 						</Div>
 					</RayoutFlexRow.Left>
 				)}
-				{doesRemainShow && (
+				{isRemainVisible && (
 					<RayoutFlexRow.Remain>
 						<Div height={20}>remain</Div>
 					</RayoutFlexRow.Remain>
 				)}
-				{doesRightShow && (
+				{isRightVisible && (
 					<RayoutFlexRow.Right>
 						<Div width={100} height={60}>
 							right
@@ -74,9 +74,9 @@ RayoutFlexRowDemo.propTypes = {
 	paddingRight: PropTypes.number,
 	gap: PropTypes.number,
 	verticalAlign: PropTypes.oneOf(['default', 'top', 'center', 'bottom']),
-	doesLeftShow: PropTypes.bool,
-	doesRemainShow: PropTypes.bool,
-	doesRightShow: PropTypes.bool,
+	isLeftVisible: PropTypes.bool,
+	isRemainVisible: PropTypes.bool,
+	isRightVisible: PropTypes.bool,
 }
 
 RayoutFlexRowDemo.defaultProps = {
@@ -87,7 +87,7 @@ RayoutFlexRowDemo.defaultProps = {
 	paddingRight: 0,
 	gap: 0,
 	verticalAlign: 'default',
-	doesLeftShow: true,
-	doesRemainShow: true,
-	doesRightShow: true,
+	isLeftVisible: true,
+	isRemainVisible: true,
+	isRightVisible: true,
 }

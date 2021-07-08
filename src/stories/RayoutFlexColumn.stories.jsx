@@ -51,7 +51,7 @@ TopRemain.args = {
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	doesBottomShow: false,
+	isBottomVisible: false,
 }
 
 export const RemainBottom = Template.bind({})
@@ -64,7 +64,7 @@ RemainBottom.args = {
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	doesTopShow: false,
+	isTopVisible: false,
 }
 
 export const TopBottom = Template.bind({})
@@ -77,5 +77,5 @@ TopBottom.args = {
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	doesRemainShow: false,
+	isRemainVisible: false,
 }
