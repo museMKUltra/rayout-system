@@ -1,13 +1,10 @@
 import React from 'react'
-import { RayoutFlexColumnDemo } from './RayoutFlexColumnDemo.jsx'
+import RayoutFlexColumn from '../components/RayoutFlexColumn.jsx'
 
 export default {
 	title: 'Example/RayoutFlexColumn',
-	component: RayoutFlexColumnDemo,
+	component: RayoutFlexColumn,
 	argTypes: {
-		base: {
-			control: { type: 'range', min: 2, max: 6, step: 2 },
-		},
 		paddingTop: {
 			control: { type: 'range', min: 0, max: 10, step: 1 },
 		},
@@ -26,12 +23,29 @@ export default {
 	},
 }
 
-const Template = args => <RayoutFlexColumnDemo {...args} />
+const Template = args => (
+	<RayoutFlexColumn
+		{...args}
+		style={{ width: '160px', height: '400px', background: 'lightgray' }}
+	>
+		<RayoutFlexColumn.Top>
+			<div style={{ width: '80px', height: '40px', background: 'darkgray' }}>
+				top
+			</div>
+		</RayoutFlexColumn.Top>
+		<RayoutFlexColumn.Remain>
+			<div style={{ background: 'darkgray' }}>remain</div>
+		</RayoutFlexColumn.Remain>
+		<RayoutFlexColumn.Bottom>
+			<div style={{ width: '120px', height: '60px', background: 'darkgray' }}>
+				bottom
+			</div>
+		</RayoutFlexColumn.Bottom>
+	</RayoutFlexColumn>
+)
 
 export const TopRemainBottom = Template.bind({})
-
 TopRemainBottom.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
@@ -40,41 +54,82 @@ TopRemainBottom.args = {
 	horizontalAlign: 'default',
 }
 
-export const TopRemain = Template.bind({})
+const TemplateTopRemain = args => (
+	<RayoutFlexColumn
+		{...args}
+		style={{ width: '160px', height: '400px', background: 'lightgray' }}
+	>
+		<RayoutFlexColumn.Top>
+			<div style={{ width: '80px', height: '40px', background: 'darkgray' }}>
+				top
+			</div>
+		</RayoutFlexColumn.Top>
+		<RayoutFlexColumn.Remain>
+			<div style={{ background: 'darkgray' }}>remain</div>
+		</RayoutFlexColumn.Remain>
+	</RayoutFlexColumn>
+)
 
+export const TopRemain = TemplateTopRemain.bind({})
 TopRemain.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	isBottomVisible: false,
 }
 
-export const RemainBottom = Template.bind({})
+const TemplateRemainBottom = args => (
+	<RayoutFlexColumn
+		{...args}
+		style={{ width: '160px', height: '400px', background: 'lightgray' }}
+	>
+		<RayoutFlexColumn.Remain>
+			<div style={{ background: 'darkgray' }}>remain</div>
+		</RayoutFlexColumn.Remain>
+		<RayoutFlexColumn.Bottom>
+			<div style={{ width: '120px', height: '60px', background: 'darkgray' }}>
+				bottom
+			</div>
+		</RayoutFlexColumn.Bottom>
+	</RayoutFlexColumn>
+)
 
+export const RemainBottom = TemplateRemainBottom.bind({})
 RemainBottom.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	isTopVisible: false,
 }
 
-export const TopBottom = Template.bind({})
+const TemplateTopBottom = args => (
+	<RayoutFlexColumn
+		{...args}
+		style={{ width: '160px', height: '400px', background: 'lightgray' }}
+	>
+		<RayoutFlexColumn.Top>
+			<div style={{ width: '80px', height: '40px', background: 'darkgray' }}>
+				top
+			</div>
+		</RayoutFlexColumn.Top>
+		<RayoutFlexColumn.Bottom>
+			<div style={{ width: '120px', height: '60px', background: 'darkgray' }}>
+				bottom
+			</div>
+		</RayoutFlexColumn.Bottom>
+	</RayoutFlexColumn>
+)
 
+export const TopBottom = TemplateTopBottom.bind({})
 TopBottom.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	horizontalAlign: 'default',
-	isRemainVisible: false,
 }
