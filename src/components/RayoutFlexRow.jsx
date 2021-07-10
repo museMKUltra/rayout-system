@@ -63,6 +63,7 @@ function RayoutFlexRow({
 
 	const alignItems = verticalAlignMapping[verticalAlign]
 	const isAligning = alignItemsAttrs.includes(alignItems)
+
 	const margin = remain ? themeSpace[gap] : themeSpace[gap] / 2
 	const marginRight = left ? margin : 0
 	const marginLeft = right ? margin : 0
