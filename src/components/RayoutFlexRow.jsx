@@ -17,6 +17,7 @@ const Div = ({ className, children }) => (
 	<div className={className}>{children}</div>
 )
 
+// https://stackoverflow.com/questions/49745637/if-statement-inside-styled-component/49745933
 Row.Box = styled(Div)`
 	${flexbox}
 	${space}
