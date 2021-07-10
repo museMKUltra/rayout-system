@@ -1,8 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-import { layout } from 'styled-system'
 import RayoutListInline from '../components/RayoutListInline.jsx'
-import ThemeProviderContainer from '../hoc/ThemeProviderContainer.js'
 
 export default {
 	title: 'Example/RayoutListInline',
@@ -29,36 +26,15 @@ export default {
 	},
 }
 
-const Div = styled.div`
-	background: darkgray;
-	${layout}
-`
-
-const RayoutListInlineDemo = styled(RayoutListInline)`
-	background: lightgray;
-`
-
 const Template = args => (
-	<ThemeProviderContainer component={RayoutListInlineDemo} {...args}>
-		<Div width={120} height={80}>
-			one
-		</Div>
-		<Div width={40} height={20}>
-			two
-		</Div>
-		<Div width={120} height={80}>
-			three
-		</Div>
-		<Div width={50} height={30}>
-			four
-		</Div>
-		<Div width={120} height={80}>
-			five
-		</Div>
-		<Div width={60} height={40}>
-			six
-		</Div>
-	</ThemeProviderContainer>
+	<RayoutListInline {...args} style={{ background: 'lightgray' }}>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>one</div>
+		<div style={{ width: '40px', height: '20px', background: 'darkgray' }}>two</div>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>three</div>
+		<div style={{ width: '50px', height: '30px', background: 'darkgray' }}>four</div>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>five</div>
+		<div style={{ width: '60px', height: '40px', background: 'darkgray' }}>six</div>
+	</RayoutListInline>
 )
 
 export const SixElements = Template.bind({})

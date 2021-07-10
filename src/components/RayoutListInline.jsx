@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { layout, flexbox, space } from 'styled-system'
-import { space as themeSpace } from '../configs/theme.js'
+import theme, { space as themeSpace } from '../configs/theme.js'
+import { ThemeProvider } from 'styled-components'
 
 const horizontalAlignMapping = {
 	default: '',
@@ -42,7 +43,6 @@ List.Item = styled.div`
 `
 
 function RayoutListInline({
-	className,
 	paddingTop,
 	paddingBottom,
 	paddingLeft,
@@ -53,33 +53,36 @@ function RayoutListInline({
 	verticalAlign,
 	wrap,
 	children,
+	...rest
 }) {
-	const positiveMargin = spaceMultiplier(-0.5)
-	const negativeMargin = spaceMultiplier(0.5)
+	const positiveMargin = spaceMultiplier(0.5)
+	const negativeMargin = spaceMultiplier(-0.5)
 
 	return (
-		<List className={className}>
-			<List.Wrapper
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				justifyContent={horizontalAlignMapping[horizontalAlign]}
-				alignItems={verticalAlignMapping[verticalAlign]}
-				flexWrap={wrapMapping[wrap.toString()]}
-				mx={positiveMargin(gapX)}
-				my={positiveMargin(gapY)}
-			>
-				{React.Children.map(children, child => (
-					<List.Item
-						mx={negativeMargin(gapX)}
-						my={negativeMargin(gapY)}
-					>
-						{React.cloneElement(child)}
-					</List.Item>
-				))}
-			</List.Wrapper>
-		</List>
+		<ThemeProvider theme={theme}>
+			<List {...rest}>
+				<List.Wrapper
+					pt={paddingTop}
+					pb={paddingBottom}
+					pl={paddingLeft}
+					pr={paddingRight}
+					justifyContent={horizontalAlignMapping[horizontalAlign]}
+					alignItems={verticalAlignMapping[verticalAlign]}
+					flexWrap={wrapMapping[wrap.toString()]}
+					mx={`${negativeMargin(gapX)}px`}
+					my={`${negativeMargin(gapY)}px`}
+				>
+					{React.Children.map(children, child => (
+						<List.Item
+							mx={`${positiveMargin(gapX)}px`}
+							my={`${positiveMargin(gapY)}px`}
+						>
+							{React.cloneElement(child)}
+						</List.Item>
+					))}
+				</List.Wrapper>
+			</List>
+		</ThemeProvider>
 	)
 }
 

@@ -1,8 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-import { layout } from 'styled-system'
 import RayoutList from '../components/RayoutList.jsx'
-import ThemeProviderContainer from '../hoc/ThemeProviderContainer.js'
 
 export default {
 	title: 'Example/RayoutList',
@@ -26,21 +23,12 @@ export default {
 	},
 }
 
-const Div = styled.div`
-  background: darkgray;
-  ${layout}
-`
-
-const RayoutListDemo = styled(RayoutList)`
-	background: lightgray;
-`
-
 const Template = args => (
-	<ThemeProviderContainer component={RayoutListDemo} {...args}>
-		<Div height={40}>one</Div>
-		<Div height={40}>two</Div>
-		<Div height={40}>three</Div>
-	</ThemeProviderContainer>
+	<RayoutList {...args} style={{ background: 'lightgray' }}>
+		<div style={{ height: '40px', background: 'darkgray' }}>one</div>
+		<div style={{ height: '40px', background: 'darkgray' }}>two</div>
+		<div style={{ height: '40px', background: 'darkgray' }}>three</div>
+	</RayoutList>
 )
 
 export const ThreeElements = Template.bind({})

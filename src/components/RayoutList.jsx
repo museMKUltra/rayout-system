@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { color, layout, flexbox, grid, space } from 'styled-system'
+import theme from '../configs/theme.js'
+import { ThemeProvider } from 'styled-components'
 
 const List = styled.div`
 	display: grid;
@@ -21,7 +23,6 @@ const horizontalAlignMapping = {
 }
 
 const RayoutList = ({
-	className,
 	paddingTop,
 	paddingBottom,
 	paddingLeft,
@@ -29,19 +30,22 @@ const RayoutList = ({
 	gap,
 	horizontalAlign,
 	children,
+	...rest
 }) => {
 	return (
-		<List
-			className={className}
-			pt={paddingTop}
-			pb={paddingBottom}
-			pl={paddingLeft}
-			pr={paddingRight}
-			gridGap={gap}
-			justifyItems={horizontalAlignMapping[horizontalAlign]}
-		>
-			{children}
-		</List>
+		<ThemeProvider theme={theme}>
+			<List
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				gridGap={gap}
+				justifyItems={horizontalAlignMapping[horizontalAlign]}
+				{...rest}
+			>
+				{children}
+			</List>
+		</ThemeProvider>
 	)
 }
 
