@@ -1,13 +1,13 @@
 import React from 'react'
-import { RayoutListInlineDemo } from './RayoutListInlineDemo.jsx'
+import styled from 'styled-components'
+import { layout } from 'styled-system'
+import RayoutListInline from '../components/RayoutListInline.jsx'
+import ThemeProviderContainer from '../hoc/ThemeProviderContainer.js'
 
 export default {
 	title: 'Example/RayoutListInline',
-	component: RayoutListInlineDemo,
+	component: RayoutListInline,
 	argTypes: {
-		base: {
-			control: { type: 'range', min: 2, max: 6, step: 2 },
-		},
 		paddingTop: {
 			control: { type: 'range', min: 0, max: 10, step: 1 },
 		},
@@ -29,11 +29,40 @@ export default {
 	},
 }
 
-const Template = args => <RayoutListInlineDemo {...args} />
+const Div = styled.div`
+	background: darkgray;
+	${layout}
+`
 
-export const RayoutListInline = Template.bind({})
-RayoutListInline.args = {
-	base: 4,
+const RayoutListInlineDemo = styled(RayoutListInline)`
+	background: lightgray;
+`
+
+const Template = args => (
+	<ThemeProviderContainer component={RayoutListInlineDemo} {...args}>
+		<Div width={120} height={80}>
+			one
+		</Div>
+		<Div width={40} height={20}>
+			two
+		</Div>
+		<Div width={120} height={80}>
+			three
+		</Div>
+		<Div width={50} height={30}>
+			four
+		</Div>
+		<Div width={120} height={80}>
+			five
+		</Div>
+		<Div width={60} height={40}>
+			six
+		</Div>
+	</ThemeProviderContainer>
+)
+
+export const SixElements = Template.bind({})
+SixElements.args = {
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,

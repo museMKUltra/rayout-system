@@ -1,36 +1,110 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { color, layout, flexbox, space } from 'styled-system'
+import { layout, flexbox, space } from 'styled-system'
+import { space as themeSpace } from '../configs/theme.js'
 
-function multiplier(times) {
-	return ({ gapY = 0, gapX = 0 }) => `${times * gapY}px ${times * gapX}px`
+const horizontalAlignMapping = {
+	default: '',
+	left: 'flex-start',
+	center: 'center',
+	right: 'flex-end',
 }
+
+const verticalAlignMapping = {
+	default: '',
+	top: 'flex-start',
+	center: 'center',
+	bottom: 'flex-end',
+}
+
+const wrapMapping = {
+	true: 'wrap',
+	false: 'nowrap',
+}
+
+const spaceMultiplier = times => number => times * themeSpace[number]
 
 const List = styled.div`
 	display: inline-block;
-	${color}
 `
 
-List.Inline = styled.div`
+List.Wrapper = styled.div`
 	display: inline-flex;
 	vertical-align: top;
-	flex-wrap: wrap;
-	margin: ${multiplier(-0.5)};
-
 	${layout}
 	${flexbox}
   ${space}
-  > * {
-		margin: ${multiplier(0.5)};
-	}
 `
 
-function RayoutListInline(props) {
+List.Item = styled.div`
+	${space}
+`
+
+function RayoutListInline({
+	className,
+	paddingTop,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	gapX,
+	gapY,
+	horizontalAlign,
+	verticalAlign,
+	wrap,
+	children,
+}) {
+	const positiveMargin = spaceMultiplier(-0.5)
+	const negativeMargin = spaceMultiplier(0.5)
+
 	return (
-		<List {...props}>
-			<List.Inline {...props}>{props.children}</List.Inline>
+		<List className={className}>
+			<List.Wrapper
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				justifyContent={horizontalAlignMapping[horizontalAlign]}
+				alignItems={verticalAlignMapping[verticalAlign]}
+				flexWrap={wrapMapping[wrap.toString()]}
+				mx={positiveMargin(gapX)}
+				my={positiveMargin(gapY)}
+			>
+				{React.Children.map(children, child => (
+					<List.Item
+						mx={negativeMargin(gapX)}
+						my={negativeMargin(gapY)}
+					>
+						{React.cloneElement(child)}
+					</List.Item>
+				))}
+			</List.Wrapper>
 		</List>
 	)
+}
+
+RayoutListInline.propTypes = {
+	paddingTop: PropTypes.number,
+	paddingBottom: PropTypes.number,
+	paddingLeft: PropTypes.number,
+	paddingRight: PropTypes.number,
+	gapX: PropTypes.number,
+	gapY: PropTypes.number,
+	horizontalAlign: PropTypes.oneOf(['default', 'left', 'center', 'right']),
+	verticalAlign: PropTypes.oneOf(['default', 'top', 'center', 'bottom']),
+	wrap: PropTypes.bool,
+}
+
+RayoutListInline.defaultProps = {
+	paddingTop: 0,
+	paddingBottom: 0,
+	paddingLeft: 0,
+	paddingRight: 0,
+	gapX: 0,
+	gapY: 0,
+	horizontalAlign: 'default',
+	verticalAlign: 'default',
+	wrap: true,
 }
 
 export default RayoutListInline
