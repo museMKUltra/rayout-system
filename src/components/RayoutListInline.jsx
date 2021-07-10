@@ -28,6 +28,7 @@ const spaceMultiplier = times => number => times * themeSpace[number]
 
 const List = styled.div`
 	display: inline-block;
+  ${space}
 `
 
 List.Wrapper = styled.div`
@@ -61,12 +62,14 @@ function RayoutListInline({
 
 	return (
 		<ThemeProvider theme={theme}>
-			<List {...rest}>
+			<List
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				{...rest}
+			>
 				<List.Wrapper
-					pt={paddingTop}
-					pb={paddingBottom}
-					pl={paddingLeft}
-					pr={paddingRight}
 					justifyContent={horizontalAlignMapping[horizontalAlign]}
 					alignItems={verticalAlignMapping[verticalAlign]}
 					flexWrap={wrapMapping[wrap.toString()]}
