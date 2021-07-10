@@ -1,6 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { color, flexbox, space } from 'styled-system'
+import theme, { space as themeSpace } from '../configs/theme.js'
+import { ThemeProvider } from 'styled-components'
 import { contentFillHeight } from '../libraries/css.js'
 
 const Row = styled.div`
@@ -20,6 +23,13 @@ Row.Box = styled(Div)`
   ${props => !props.isAligning && contentFillHeight}
 `
 
+const verticalAlignMapping = {
+	default: '',
+	top: 'flex-start',
+	center: 'center',
+	bottom: 'flex-end',
+}
+
 const alignItemsAttrs = ['flex-start', 'center', 'flex-end']
 
 const childMap = {
@@ -34,8 +44,16 @@ Object.keys(childMap).forEach(key => {
 })
 
 // https://medium.com/@srph/react-imitating-vue-slots-eab8393f96fd
-function RayoutFlexRow(props) {
-	const { children, alignItems, gap } = props
+function RayoutFlexRow({
+	paddingTop,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+	gap,
+	verticalAlign,
+	children,
+	...rest
+}) {
 	const findChildren = type =>
 		children.find(child => child.type === type)?.props.children
 
@@ -43,24 +61,56 @@ function RayoutFlexRow(props) {
 	const remain = findChildren(childMap.remain)
 	const right = findChildren(childMap.right)
 
+	const alignItems = verticalAlignMapping[verticalAlign]
 	const isAligning = alignItemsAttrs.includes(alignItems)
-	const margin = remain ? gap : gap / 2
+	const margin = remain ? themeSpace[gap] : themeSpace[gap] / 2
 	const marginRight = left ? margin : 0
 	const marginLeft = right ? margin : 0
 
 	return (
-		<Row {...props}>
-			<Row.Box isAligning={isAligning} flex="0 0 auto" mr={`${marginRight}px`}>
-				{left}
-			</Row.Box>
-			<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
-				{remain}
-			</Row.Box>
-			<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
-				{right}
-			</Row.Box>
-		</Row>
+		<ThemeProvider theme={theme}>
+			<Row
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				alignItems={verticalAlignMapping[verticalAlign]}
+				{...rest}
+			>
+				<Row.Box
+					isAligning={isAligning}
+					flex="0 0 auto"
+					mr={`${marginRight}px`}
+				>
+					{left}
+				</Row.Box>
+				<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
+					{remain}
+				</Row.Box>
+				<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
+					{right}
+				</Row.Box>
+			</Row>
+		</ThemeProvider>
 	)
+}
+
+RayoutFlexRow.propTypes = {
+	paddingTop: PropTypes.number,
+	paddingBottom: PropTypes.number,
+	paddingLeft: PropTypes.number,
+	paddingRight: PropTypes.number,
+	gap: PropTypes.number,
+	verticalAlign: PropTypes.oneOf(['default', 'top', 'center', 'bottom']),
+}
+
+RayoutFlexRow.defaultProps = {
+	paddingTop: 0,
+	paddingBottom: 0,
+	paddingLeft: 0,
+	paddingRight: 0,
+	gap: 0,
+	verticalAlign: 'default',
 }
 
 export default RayoutFlexRow

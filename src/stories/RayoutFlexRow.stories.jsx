@@ -1,13 +1,10 @@
 import React from 'react'
-import { RayoutFlexRowDemo } from './RayoutFlexRowDemo.jsx'
+import RayoutFlexRow from '../components/RayoutFlexRow.jsx'
 
 export default {
 	title: 'Example/RayoutFlexRow',
-	component: RayoutFlexRowDemo,
+	component: RayoutFlexRow,
 	argTypes: {
-		base: {
-			control: { type: 'range', min: 2, max: 6, step: 2 },
-		},
 		paddingTop: {
 			control: { type: 'range', min: 0, max: 10, step: 1 },
 		},
@@ -26,12 +23,26 @@ export default {
 	},
 }
 
-const Template = args => <RayoutFlexRowDemo {...args} />
+const Template = args => (
+	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+		<RayoutFlexRow.Left>
+			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
+				left
+			</div>
+		</RayoutFlexRow.Left>
+		<RayoutFlexRow.Remain>
+			<div style={{ background: 'darkgray', height: '20px' }}>remain</div>
+		</RayoutFlexRow.Remain>
+		<RayoutFlexRow.Right>
+			<div style={{ background: 'darkgray', width: '100px', height: '60px' }}>
+				right
+			</div>
+		</RayoutFlexRow.Right>
+	</RayoutFlexRow>
+)
 
 export const LeftRemainRight = Template.bind({})
-
 LeftRemainRight.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
@@ -40,41 +51,73 @@ LeftRemainRight.args = {
 	verticalAlign: 'default',
 }
 
-export const LeftRemain = Template.bind({})
+const TemplateLeftRemain = args => (
+	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+		<RayoutFlexRow.Left>
+			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
+				left
+			</div>
+		</RayoutFlexRow.Left>
+		<RayoutFlexRow.Remain>
+			<div style={{ background: 'darkgray', height: '20px' }}>remain</div>
+		</RayoutFlexRow.Remain>
+	</RayoutFlexRow>
+)
 
+export const LeftRemain = TemplateLeftRemain.bind({})
 LeftRemain.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	isRightVisible: false,
 }
 
-export const RemainRight = Template.bind({})
+const TemplateRemainRight = args => (
+	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+		<RayoutFlexRow.Remain>
+			<div style={{ background: 'darkgray', height: '20px' }}>remain</div>
+		</RayoutFlexRow.Remain>
+		<RayoutFlexRow.Right>
+			<div style={{ background: 'darkgray', width: '100px', height: '60px' }}>
+				right
+			</div>
+		</RayoutFlexRow.Right>
+	</RayoutFlexRow>
+)
 
+export const RemainRight = TemplateRemainRight.bind({})
 RemainRight.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	isLeftVisible: false,
 }
 
-export const LeftRight = Template.bind({})
+const TemplateLeftRight = args => (
+	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+		<RayoutFlexRow.Left>
+			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
+				left
+			</div>
+		</RayoutFlexRow.Left>
+		<RayoutFlexRow.Right>
+			<div style={{ background: 'darkgray', width: '100px', height: '60px' }}>
+				right
+			</div>
+		</RayoutFlexRow.Right>
+	</RayoutFlexRow>
+)
 
+export const LeftRight = TemplateLeftRight.bind({})
 LeftRight.args = {
-	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,
 	paddingRight: 5,
 	gap: 5,
 	verticalAlign: 'default',
-	isRemainVisible: false,
 }
