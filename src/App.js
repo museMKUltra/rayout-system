@@ -1,9 +1,8 @@
 import React from 'react'
 import './App.css'
-import { ThemeProvider } from 'styled-components'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
-import theme from './configs/theme.js'
+import RayoutColumns from './components/RayoutColumns.jsx'
 
 const Div = styled.div`
 	background: lightgray;
@@ -12,9 +11,18 @@ const Div = styled.div`
 
 function App() {
 	return (
-		<ThemeProvider theme={theme}>
-			<Div></Div>
-		</ThemeProvider>
+		<RayoutColumns
+			contentMinWidth={200}
+			columnCount={10}
+			flowDirection={'row'}
+			verticalAlign={'center'}
+			gapX={3}
+			gapY={5}
+		>
+			<Div height={40}>one</Div>
+			<Div height={20}>two</Div>
+			<Div height={30}>three</Div>
+		</RayoutColumns>
 	)
 }
 
