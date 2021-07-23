@@ -1,28 +1,40 @@
 import React from 'react'
 import './App.css'
 import styled from 'styled-components'
-import { layout } from 'styled-system'
-import RayoutColumns from './components/RayoutColumns.jsx'
+import { position, layout } from 'styled-system'
+import RayoutAbsolute from './components/RayoutAbsolute.jsx'
+
+const Box = styled.div`
+	background: darkgray;
+	${position}
+	${layout}
+`
 
 const Div = styled.div`
+	height: 100px;
+	width: 100px;
 	background: lightgray;
 	${layout}
 `
 
 function App() {
 	return (
-		<RayoutColumns
-			contentMinWidth={200}
-			columnCount={10}
-			flowDirection={'row'}
-			verticalAlign={'center'}
-			gapX={3}
-			gapY={5}
-		>
-			<Div height={40}>one</Div>
-			<Div height={20}>two</Div>
-			<Div height={30}>three</Div>
-		</RayoutColumns>
+		<Box position={'relative'} height={'400px'}>
+			<RayoutAbsolute paddingTop={10}>
+				<RayoutAbsolute.TopLeft>
+					<Div>top</Div>
+				</RayoutAbsolute.TopLeft>
+				<RayoutAbsolute.Left>
+					<Div>left</Div>
+				</RayoutAbsolute.Left>
+				<RayoutAbsolute.Right>
+					<Div>right</Div>
+				</RayoutAbsolute.Right>
+				<RayoutAbsolute.BottomRight>
+					<Div>bottom</Div>
+				</RayoutAbsolute.BottomRight>
+			</RayoutAbsolute>
+		</Box>
 	)
 }
 

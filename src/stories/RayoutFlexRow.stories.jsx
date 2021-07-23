@@ -24,7 +24,7 @@ export default {
 }
 
 const Template = args => (
-	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+	<RayoutFlexRow {...args} style={{ background: 'lightgray', width: '600px' }}>
 		<RayoutFlexRow.Left>
 			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
 				left
@@ -52,7 +52,7 @@ LeftRemainRight.args = {
 }
 
 const TemplateLeftRemain = args => (
-	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+	<RayoutFlexRow {...args} style={{ background: 'lightgray', width: '600px' }}>
 		<RayoutFlexRow.Left>
 			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
 				left
@@ -75,7 +75,7 @@ LeftRemain.args = {
 }
 
 const TemplateRemainRight = args => (
-	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+	<RayoutFlexRow {...args} style={{ background: 'lightgray', width: '600px' }}>
 		<RayoutFlexRow.Remain>
 			<div style={{ background: 'darkgray', height: '20px' }}>remain</div>
 		</RayoutFlexRow.Remain>
@@ -98,7 +98,7 @@ RemainRight.args = {
 }
 
 const TemplateLeftRight = args => (
-	<RayoutFlexRow {...args} style={{ background: 'lightgray' }}>
+	<RayoutFlexRow {...args} style={{ background: 'lightgray', width: '600px' }}>
 		<RayoutFlexRow.Left>
 			<div style={{ background: 'darkgray', width: '100px', height: '40px' }}>
 				left

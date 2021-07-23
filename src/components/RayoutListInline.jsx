@@ -28,7 +28,7 @@ const spaceMultiplier = times => number => times * themeSpace[number]
 
 const List = styled.div`
 	display: inline-block;
-  ${space}
+	${space}
 `
 
 List.Wrapper = styled.div`
