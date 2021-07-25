@@ -3,6 +3,8 @@ import './App.css'
 import styled from 'styled-components'
 import { position, layout } from 'styled-system'
 import RayoutAbsolute from './components/RayoutAbsolute.jsx'
+import RayoutList from './components/RayoutList.jsx'
+import RayoutListInline from './components/RayoutListInline.jsx'
 
 const Box = styled.div`
 	background: darkgray;
@@ -34,6 +36,12 @@ function App() {
 					<Div>bottom</Div>
 				</RayoutAbsolute.BottomRight>
 			</RayoutAbsolute>
+			<RayoutList>
+				<div>list</div>
+			</RayoutList>
+			<RayoutListInline>
+				<div>list inline</div>
+			</RayoutListInline>
 		</Box>
 	)
 }

@@ -6,11 +6,11 @@ import { space, flexbox } from 'styled-system'
 import PropTypes from 'prop-types'
 
 const Container = styled.div`
-  display: flex;
+	display: flex;
 	box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	${space}
@@ -24,8 +24,8 @@ const Wrapper = styled.div`
 `
 
 const Cell = styled.div`
-  grid-row: 1 / 1;
-  grid-column: 1 / 1;
+	grid-row: 1 / 1;
+	grid-column: 1 / 1;
 	${flexbox}
 `
 
@@ -54,19 +54,19 @@ function RayoutAbsolute({
 	children,
 	...rest
 }) {
-	console.log(children)
-	const findChildren = type =>
-		children.find(child => child.type === type)?.props.children
+	const childList = React.Children.toArray(children)
+	const findChild = type =>
+		childList.find(child => child.type === type)?.props.children
 
-	const top = findChildren(childMap.top)
-	const left = findChildren(childMap.left)
-	const right = findChildren(childMap.right)
-	const bottom = findChildren(childMap.bottom)
-	const center = findChildren(childMap.center)
-	const topLeft = findChildren(childMap.topLeft)
-	const topRight = findChildren(childMap.topRight)
-	const bottomLeft = findChildren(childMap.bottomLeft)
-	const bottomRight = findChildren(childMap.bottomRight)
+	const top = findChild(childMap.top)
+	const left = findChild(childMap.left)
+	const right = findChild(childMap.right)
+	const bottom = findChild(childMap.bottom)
+	const center = findChild(childMap.center)
+	const topLeft = findChild(childMap.topLeft)
+	const topRight = findChild(childMap.topRight)
+	const bottomLeft = findChild(childMap.bottomLeft)
+	const bottomRight = findChild(childMap.bottomRight)
 
 	return (
 		<ThemeProvider theme={theme}>

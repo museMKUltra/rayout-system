@@ -55,12 +55,13 @@ function RayoutFlexRow({
 	children,
 	...rest
 }) {
-	const findChildren = type =>
-		children.find(child => child.type === type)?.props.children
+	const childList = React.Children.toArray(children)
+	const findChild = type =>
+		childList.find(child => child.type === type)?.props.children
 
-	const left = findChildren(childMap.left)
-	const remain = findChildren(childMap.remain)
-	const right = findChildren(childMap.right)
+	const left = findChild(childMap.left)
+	const remain = findChild(childMap.remain)
+	const right = findChild(childMap.right)
 
 	const alignItems = verticalAlignMapping[verticalAlign]
 	const isAligning = alignItemsAttrs.includes(alignItems)

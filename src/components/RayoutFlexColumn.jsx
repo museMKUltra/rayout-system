@@ -53,12 +53,13 @@ function RayoutFlexColumn({
 	children,
 	...rest
 }) {
-	const findChildren = type =>
-		children.find(child => child.type === type)?.props.children
+	const childList = React.Children.toArray(children)
+	const findChild = type =>
+		childList.find(child => child.type === type)?.props.children
 
-	const top = findChildren(childMap.top)
-	const remain = findChildren(childMap.remain)
-	const bottom = findChildren(childMap.bottom)
+	const top = findChild(childMap.top)
+	const remain = findChild(childMap.remain)
+	const bottom = findChild(childMap.bottom)
 
 	const margin = remain ? themeSpace[gap] : themeSpace[gap] / 2
 	const marginBottom = top ? margin : 0
