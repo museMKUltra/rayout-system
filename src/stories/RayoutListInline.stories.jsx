@@ -5,6 +5,9 @@ export default {
 	title: 'Example/RayoutListInline',
 	component: RayoutListInline,
 	argTypes: {
+		base: {
+			control: { type: 'range', min: 2, max: 6, step: 2 },
+		},
 		paddingTop: {
 			control: { type: 'range', min: 0, max: 10, step: 1 },
 		},
@@ -28,17 +31,30 @@ export default {
 
 const Template = args => (
 	<RayoutListInline {...args} style={{ background: 'lightgray' }}>
-		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>one</div>
-		<div style={{ width: '40px', height: '20px', background: 'darkgray' }}>two</div>
-		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>three</div>
-		<div style={{ width: '50px', height: '30px', background: 'darkgray' }}>four</div>
-		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>five</div>
-		<div style={{ width: '60px', height: '40px', background: 'darkgray' }}>six</div>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>
+			one
+		</div>
+		<div style={{ width: '40px', height: '20px', background: 'darkgray' }}>
+			two
+		</div>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>
+			three
+		</div>
+		<div style={{ width: '50px', height: '30px', background: 'darkgray' }}>
+			four
+		</div>
+		<div style={{ width: '120px', height: '80px', background: 'darkgray' }}>
+			five
+		</div>
+		<div style={{ width: '60px', height: '40px', background: 'darkgray' }}>
+			six
+		</div>
 	</RayoutListInline>
 )
 
 export const SixElements = Template.bind({})
 SixElements.args = {
+	base: 4,
 	paddingTop: 5,
 	paddingBottom: 5,
 	paddingLeft: 5,

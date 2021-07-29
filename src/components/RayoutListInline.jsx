@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { layout, flexbox, space } from 'styled-system'
-import theme, { space as themeSpace } from '../configs/theme.js'
+import { spaceGenerator } from '../libraries/space.js'
 import { ThemeProvider } from 'styled-components'
 
 const horizontalAlignMapping = {
@@ -24,8 +24,6 @@ const wrapMapping = {
 	false: 'nowrap',
 }
 
-const spaceMultiplier = times => number => times * themeSpace[number]
-
 const List = styled.div`
 	display: inline-block;
 	${space}
@@ -45,6 +43,7 @@ List.Item = styled.div`
 
 // https://www.geeksforgeeks.org/how-to-use-react-cloneelement-function/
 function RayoutListInline({
+	base,
 	paddingTop,
 	paddingBottom,
 	paddingLeft,
@@ -57,6 +56,8 @@ function RayoutListInline({
 	children,
 	...rest
 }) {
+	const theme = spaceGenerator(base)
+	const spaceMultiplier = times => number => times * theme.space[number]
 	const positiveMargin = spaceMultiplier(0.5)
 	const negativeMargin = spaceMultiplier(-0.5)
 
@@ -91,6 +92,7 @@ function RayoutListInline({
 }
 
 RayoutListInline.propTypes = {
+	base: PropTypes.number,
 	paddingTop: PropTypes.number,
 	paddingBottom: PropTypes.number,
 	paddingLeft: PropTypes.number,
@@ -103,6 +105,7 @@ RayoutListInline.propTypes = {
 }
 
 RayoutListInline.defaultProps = {
+	base: 4,
 	paddingTop: 0,
 	paddingBottom: 0,
 	paddingLeft: 0,
