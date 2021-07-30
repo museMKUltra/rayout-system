@@ -1,24 +1,33 @@
 import React from 'react'
-import './App.css'
-import styled from 'styled-components'
-import { layout } from 'styled-system'
-import RayoutAlign from './components/RayoutAlign.jsx'
-
-const Box = styled(RayoutAlign)`
-	background: darkgray;
-	${layout}
-`
-
-const Div = styled.div`
-	height: 80px;
-	background: lightgray;
-`
+import Example1 from './components/Example1.jsx'
+import Example2 from './components/Example2.jsx'
+import Example3 from './components/Example3.jsx'
+import Example4 from './components/Example4.jsx'
+import Example5 from './components/Example5.jsx'
+import Example6 from './components/Example6.jsx'
+import Example7 from './components/Example7.jsx'
+import Example8 from './components/Example8.jsx'
+import Example9 from './components/Example9.jsx'
+import Example10 from './components/Example10.jsx'
+import Example11 from './components/Example11.jsx'
+import Example12 from './components/Example12.jsx'
 
 function App() {
 	return (
-		<Box paddingTop={10} height={'400px'}>
-			<Div>align</Div>
-		</Box>
+		<>
+			<Example1 />
+			<Example2 />
+			<Example3 />
+			<Example4 />
+			<Example5 />
+			<Example6 />
+			<Example7 />
+			<Example8 />
+			<Example9 />
+			<Example10 />
+			<Example11 />
+			<Example12 />
+		</>
 	)
 }
 
