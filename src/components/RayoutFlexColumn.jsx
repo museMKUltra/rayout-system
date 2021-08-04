@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { color, flexbox, layout, space } from 'styled-system'
 import { contentFillHeight } from '../libraries/css.js'
 import theme, { space as themeSpace } from '../configs/theme.js'
-import { ThemeProvider } from 'styled-components'
+import { forEach } from 'lodash'
 
 const Column = styled.div`
 	display: flex;
@@ -38,10 +38,7 @@ const childMap = {
 	bottom: 'Bottom',
 }
 
-Object.keys(childMap).forEach(key => {
-	const type = childMap[key]
-	RayoutFlexColumn[type] = type
-})
+forEach(childMap, type => (RayoutFlexColumn[type] = type))
 
 function RayoutFlexColumn({
 	paddingTop,
@@ -66,26 +63,25 @@ function RayoutFlexColumn({
 	const marginTop = bottom ? margin : 0
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Column
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				alignItems={horizontalAlignMapping[horizontalAlign]}
-				{...rest}
-			>
-				<Column.Box flex="0 0 auto" mb={`${marginBottom}px`}>
-					{top}
-				</Column.Box>
-				<Column.Box flex="1 1 auto" minHeight={0}>
-					{remain}
-				</Column.Box>
-				<Column.Box flex="0 0 auto" mt={`${marginTop}px`}>
-					{bottom}
-				</Column.Box>
-			</Column>
-		</ThemeProvider>
+		<Column
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			alignItems={horizontalAlignMapping[horizontalAlign]}
+			{...rest}
+		>
+			<Column.Box flex="0 0 auto" mb={`${marginBottom}px`}>
+				{top}
+			</Column.Box>
+			<Column.Box flex="1 1 auto" minHeight={0}>
+				{remain}
+			</Column.Box>
+			<Column.Box flex="0 0 auto" mt={`${marginTop}px`}>
+				{bottom}
+			</Column.Box>
+		</Column>
 	)
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../configs/theme.js'
-import { ThemeProvider } from 'styled-components'
 import { space, flexbox } from 'styled-system'
 import PropTypes from 'prop-types'
 
@@ -38,19 +37,18 @@ function RayoutAlign({
 	...rest
 }) {
 	return (
-		<ThemeProvider theme={theme}>
-			<Container
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				justifyContent={horizontalAlignMapping[horizontalAlign]}
-				alignContent={verticalAlignMapping[verticalAlign]}
-				{...rest}
-			>
-				{children}
-			</Container>
-		</ThemeProvider>
+		<Container
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			justifyContent={horizontalAlignMapping[horizontalAlign]}
+			alignContent={verticalAlignMapping[verticalAlign]}
+			{...rest}
+		>
+			{children}
+		</Container>
 	)
 }
 

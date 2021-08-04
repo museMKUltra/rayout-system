@@ -11,10 +11,23 @@ import Example9 from './components/Example9.jsx'
 import Example10 from './components/Example10.jsx'
 import Example11 from './components/Example11.jsx'
 import Example12 from './components/Example12.jsx'
+import RayoutFlexRow from './components/RayoutFlexRow.jsx'
+import './App.css'
 
 function App() {
 	return (
 		<>
+			<RayoutFlexRow>
+				<RayoutFlexRow.Left>
+					<div>left</div>
+				</RayoutFlexRow.Left>
+				<RayoutFlexRow.Remain>
+					<div>remain</div>
+				</RayoutFlexRow.Remain>
+				<RayoutFlexRow.Right>
+					<div>right</div>
+				</RayoutFlexRow.Right>
+			</RayoutFlexRow>
 			<Example1 />
 			<Example2 />
 			<Example3 />

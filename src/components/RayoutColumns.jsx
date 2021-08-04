@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { flexbox, grid, layout, space } from 'styled-system'
-import styled, { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 import theme, { space as themeSpace } from '../configs/theme.js'
 
 const verticalAlignMapping = {
@@ -60,38 +60,37 @@ function RayoutColumns({
 	const width = contentMinWidth ? `${contentMinWidth}px` : 'auto'
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Columns
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				{...rest}
-			>
-				{isRowDirection ? (
-					<Columns.Row
-						gridRowGap={gapX}
-						gridColumnGap={gapY}
-						gridTemplateColumns={`repeat(${repeat}, minmax(${minmax}, 1fr))`}
-						alignItems={verticalAlignMapping[verticalAlign]}
-					>
-						{children}
-					</Columns.Row>
-				) : (
-					<Columns.Column
-						columns={`${width} ${count}`}
-						columnGap={`${themeSpace[gapX]}px`}
-						mb={`-${themeSpace[gapY]}px`}
-					>
-						{React.Children.map(children, child => (
-							<Columns.Item mb={gapY}>
-								{React.cloneElement(child)}
-							</Columns.Item>
-						))}
-					</Columns.Column>
-				)}
-			</Columns>
-		</ThemeProvider>
+		<Columns
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			{...rest}
+		>
+			{isRowDirection ? (
+				<Columns.Row
+					gridRowGap={gapX}
+					gridColumnGap={gapY}
+					gridTemplateColumns={`repeat(${repeat}, minmax(${minmax}, 1fr))`}
+					alignItems={verticalAlignMapping[verticalAlign]}
+				>
+					{children}
+				</Columns.Row>
+			) : (
+				<Columns.Column
+					columns={`${width} ${count}`}
+					columnGap={`${themeSpace[gapX]}px`}
+					mb={`-${themeSpace[gapY]}px`}
+				>
+					{React.Children.map(children, child => (
+						<Columns.Item mb={gapY}>
+							{React.cloneElement(child)}
+						</Columns.Item>
+					))}
+				</Columns.Column>
+			)}
+		</Columns>
 	)
 }
 

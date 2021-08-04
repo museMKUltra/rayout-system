@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { color, flexbox, space } from 'styled-system'
 import theme, { space as themeSpace } from '../configs/theme.js'
-import { ThemeProvider } from 'styled-components'
 import { contentFillHeight } from '../libraries/css.js'
+import { forEach } from 'lodash'
 
 const Row = styled.div`
 	display: flex;
@@ -39,10 +39,7 @@ const childMap = {
 	right: 'Right',
 }
 
-Object.keys(childMap).forEach(key => {
-	const type = childMap[key]
-	RayoutFlexRow[type] = type
-})
+forEach(childMap, type => (RayoutFlexRow[type] = type))
 
 // https://medium.com/@srph/react-imitating-vue-slots-eab8393f96fd
 function RayoutFlexRow({
@@ -71,30 +68,29 @@ function RayoutFlexRow({
 	const marginLeft = right ? margin : 0
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Row
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				alignItems={verticalAlignMapping[verticalAlign]}
-				{...rest}
+		<Row
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			alignItems={verticalAlignMapping[verticalAlign]}
+			{...rest}
+		>
+			<Row.Box
+				isAligning={isAligning}
+				flex="0 0 auto"
+				mr={`${marginRight}px`}
 			>
-				<Row.Box
-					isAligning={isAligning}
-					flex="0 0 auto"
-					mr={`${marginRight}px`}
-				>
-					{left}
-				</Row.Box>
-				<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
-					{remain}
-				</Row.Box>
-				<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
-					{right}
-				</Row.Box>
-			</Row>
-		</ThemeProvider>
+				{left}
+			</Row.Box>
+			<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
+				{remain}
+			</Row.Box>
+			<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
+				{right}
+			</Row.Box>
+		</Row>
 	)
 }
 

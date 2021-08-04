@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../configs/theme.js'
-import { ThemeProvider } from 'styled-components'
 import { space, flexbox } from 'styled-system'
 import PropTypes from 'prop-types'
+import { forEach } from 'lodash'
 
 const Container = styled.div`
 	display: flex;
@@ -41,10 +41,7 @@ const childMap = {
 	bottomRight: 'BottomRight',
 }
 
-Object.keys(childMap).forEach(key => {
-	const type = childMap[key]
-	RayoutAbsolute[type] = type
-})
+forEach(childMap, type => (RayoutAbsolute[type] = type))
 
 function RayoutAbsolute({
 	paddingTop,
@@ -69,45 +66,44 @@ function RayoutAbsolute({
 	const bottomRight = findChild(childMap.bottomRight)
 
 	return (
-		<ThemeProvider theme={theme}>
-			<Container
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				{...rest}
-			>
-				<Wrapper>
-					<Cell justifySelf={'center'} alignSelf={'start'}>
-						{top}
-					</Cell>
-					<Cell justifySelf={'start'} alignSelf={'center'}>
-						{left}
-					</Cell>
-					<Cell justifySelf={'end'} alignSelf={'center'}>
-						{right}
-					</Cell>
-					<Cell justifySelf={'center'} alignSelf={'end'}>
-						{bottom}
-					</Cell>
-					<Cell justifySelf={'start'} alignSelf={'start'}>
-						{topLeft}
-					</Cell>
-					<Cell justifySelf={'center'} alignSelf={'center'}>
-						{center}
-					</Cell>
-					<Cell justifySelf={'end'} alignSelf={'start'}>
-						{topRight}
-					</Cell>
-					<Cell justifySelf={'start'} alignSelf={'end'}>
-						{bottomLeft}
-					</Cell>
-					<Cell justifySelf={'end'} alignSelf={'end'}>
-						{bottomRight}
-					</Cell>
-				</Wrapper>
-			</Container>
-		</ThemeProvider>
+		<Container
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			{...rest}
+		>
+			<Wrapper>
+				<Cell justifySelf={'center'} alignSelf={'start'}>
+					{top}
+				</Cell>
+				<Cell justifySelf={'start'} alignSelf={'center'}>
+					{left}
+				</Cell>
+				<Cell justifySelf={'end'} alignSelf={'center'}>
+					{right}
+				</Cell>
+				<Cell justifySelf={'center'} alignSelf={'end'}>
+					{bottom}
+				</Cell>
+				<Cell justifySelf={'start'} alignSelf={'start'}>
+					{topLeft}
+				</Cell>
+				<Cell justifySelf={'center'} alignSelf={'center'}>
+					{center}
+				</Cell>
+				<Cell justifySelf={'end'} alignSelf={'start'}>
+					{topRight}
+				</Cell>
+				<Cell justifySelf={'start'} alignSelf={'end'}>
+					{bottomLeft}
+				</Cell>
+				<Cell justifySelf={'end'} alignSelf={'end'}>
+					{bottomRight}
+				</Cell>
+			</Wrapper>
+		</Container>
 	)
 }
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { layout, flexbox, space } from 'styled-system'
 import { spaceGenerator } from '../libraries/space.js'
-import { ThemeProvider } from 'styled-components'
 
 const horizontalAlignMapping = {
 	default: '',
@@ -62,32 +61,31 @@ function RayoutListInline({
 	const negativeMargin = spaceMultiplier(-0.5)
 
 	return (
-		<ThemeProvider theme={theme}>
-			<List
-				pt={paddingTop}
-				pb={paddingBottom}
-				pl={paddingLeft}
-				pr={paddingRight}
-				{...rest}
+		<List
+			theme={theme}
+			pt={paddingTop}
+			pb={paddingBottom}
+			pl={paddingLeft}
+			pr={paddingRight}
+			{...rest}
+		>
+			<List.Wrapper
+				justifyContent={horizontalAlignMapping[horizontalAlign]}
+				alignItems={verticalAlignMapping[verticalAlign]}
+				flexWrap={wrapMapping[wrap.toString()]}
+				mx={`${negativeMargin(gapX)}px`}
+				my={`${negativeMargin(gapY)}px`}
 			>
-				<List.Wrapper
-					justifyContent={horizontalAlignMapping[horizontalAlign]}
-					alignItems={verticalAlignMapping[verticalAlign]}
-					flexWrap={wrapMapping[wrap.toString()]}
-					mx={`${negativeMargin(gapX)}px`}
-					my={`${negativeMargin(gapY)}px`}
-				>
-					{React.Children.map(children, child => (
-						<List.Item
-							mx={`${positiveMargin(gapX)}px`}
-							my={`${positiveMargin(gapY)}px`}
-						>
-							{React.cloneElement(child)}
-						</List.Item>
-					))}
-				</List.Wrapper>
-			</List>
-		</ThemeProvider>
+				{React.Children.map(children, child => (
+					<List.Item
+						mx={`${positiveMargin(gapX)}px`}
+						my={`${positiveMargin(gapY)}px`}
+					>
+						{React.cloneElement(child)}
+					</List.Item>
+				))}
+			</List.Wrapper>
+		</List>
 	)
 }
 
