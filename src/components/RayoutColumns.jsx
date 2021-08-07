@@ -1,34 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { flexbox, grid, layout, space } from 'styled-system'
-import styled from 'styled-components'
-import theme, { space as themeSpace } from '../configs/theme.js'
+import { grid, space } from 'styled-system'
+import styled, { ThemeProvider } from 'styled-components'
+import spaces from '../themes/spaces.js'
+import aligns, { gridAlign } from '../themes/aligns.js'
 
-const verticalAlignMapping = {
-	default: 'stretch',
-	top: 'start',
-	center: 'center',
-	bottom: 'end',
-}
-
-const Columns = styled.div`
+const SdColumns = styled.div`
 	${space}
 `
 
-Columns.Row = styled.div`
+SdColumns.Row = styled.div`
 	display: grid;
-	${layout}
 	${grid}
-  ${flexbox}
+	${gridAlign}
 `
 
-Columns.Column = styled.div`
+SdColumns.Column = styled.div`
 	columns: ${props => props.columns};
 	column-gap: ${props => props.columnGap};
 	${space}
 `
 
-Columns.Item = styled.div`
+SdColumns.Item = styled.div`
 	display: inline-grid;
 	width: 100%;
 	break-inside: avoid;
@@ -60,37 +53,38 @@ function RayoutColumns({
 	const width = contentMinWidth ? `${contentMinWidth}px` : 'auto'
 
 	return (
-		<Columns
-			theme={theme}
-			pt={paddingTop}
-			pb={paddingBottom}
-			pl={paddingLeft}
-			pr={paddingRight}
-			{...rest}
-		>
-			{isRowDirection ? (
-				<Columns.Row
-					gridRowGap={gapX}
-					gridColumnGap={gapY}
-					gridTemplateColumns={`repeat(${repeat}, minmax(${minmax}, 1fr))`}
-					alignItems={verticalAlignMapping[verticalAlign]}
-				>
-					{children}
-				</Columns.Row>
-			) : (
-				<Columns.Column
-					columns={`${width} ${count}`}
-					columnGap={`${themeSpace[gapX]}px`}
-					mb={`-${themeSpace[gapY]}px`}
-				>
-					{React.Children.map(children, child => (
-						<Columns.Item mb={gapY}>
-							{React.cloneElement(child)}
-						</Columns.Item>
-					))}
-				</Columns.Column>
-			)}
-		</Columns>
+		<ThemeProvider theme={{ ...spaces, ...aligns }}>
+			<SdColumns
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				{...rest}
+			>
+				{isRowDirection ? (
+					<SdColumns.Row
+						gridRowGap={gapX}
+						gridColumnGap={gapY}
+						gridTemplateColumns={`repeat(${repeat}, minmax(${minmax}, 1fr))`}
+						verticalAlign={verticalAlign}
+					>
+						{children}
+					</SdColumns.Row>
+				) : (
+					<SdColumns.Column
+						columns={`${width} ${count}`}
+						columnGap={`${spaces.space[gapX]}px`}
+						mb={`-${spaces.space[gapY]}px`}
+					>
+						{React.Children.map(children, child => (
+							<SdColumns.Item mb={gapY}>
+								{React.cloneElement(child)}
+							</SdColumns.Item>
+						))}
+					</SdColumns.Column>
+				)}
+			</SdColumns>
+		</ThemeProvider>
 	)
 }
 

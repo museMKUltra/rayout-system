@@ -1,25 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { color, layout, flexbox, grid, space } from 'styled-system'
-import theme from '../configs/theme.js'
+import { grid, space } from 'styled-system'
+import spaces from '../themes/spaces.js'
+import aligns, { gridAlign } from '../themes/aligns.js'
 
-const List = styled.div`
+const SdList = styled.div`
 	display: grid;
-	gridtemplatecolumns: minmax(0, auto);
-	${color}
-	${layout}
-  ${flexbox}
+	grid-template-columns: minmax(0, auto);
   ${grid}
   ${space}
+  ${gridAlign}
 `
-
-const horizontalAlignMapping = {
-	default: '',
-	left: 'start',
-	center: 'center',
-	right: 'end',
-}
 
 const RayoutList = ({
 	paddingTop,
@@ -32,18 +24,18 @@ const RayoutList = ({
 	...rest
 }) => {
 	return (
-		<List
-			theme={theme}
+		<SdList
+			theme={{ ...spaces, ...aligns}}
 			pt={paddingTop}
 			pb={paddingBottom}
 			pl={paddingLeft}
 			pr={paddingRight}
 			gridGap={gap}
-			justifyItems={horizontalAlignMapping[horizontalAlign]}
+			horizontalAlign={horizontalAlign}
 			{...rest}
 		>
 			{children}
-		</List>
+		</SdList>
 	)
 }
 

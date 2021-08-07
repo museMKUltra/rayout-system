@@ -1,11 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
-import theme from '../configs/theme.js'
-import { space, flexbox } from 'styled-system'
 import PropTypes from 'prop-types'
 import { forEach } from 'lodash'
+import styled from 'styled-components'
+import { space, flexbox } from 'styled-system'
+import spaces from '../themes/spaces.js'
 
-const Container = styled.div`
+const SdContainer = styled.div`
 	display: flex;
 	box-sizing: border-box;
 	position: absolute;
@@ -66,8 +66,8 @@ function RayoutAbsolute({
 	const bottomRight = findChild(childMap.bottomRight)
 
 	return (
-		<Container
-			theme={theme}
+		<SdContainer
+			theme={spaces}
 			pt={paddingTop}
 			pb={paddingBottom}
 			pl={paddingLeft}
@@ -103,7 +103,7 @@ function RayoutAbsolute({
 					{bottomRight}
 				</Cell>
 			</Wrapper>
-		</Container>
+		</SdContainer>
 	)
 }
 

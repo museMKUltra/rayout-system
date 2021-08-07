@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { color, flexbox, space } from 'styled-system'
-import theme, { space as themeSpace } from '../configs/theme.js'
-import { contentFillHeight } from '../libraries/css.js'
 import { forEach } from 'lodash'
+import styled from 'styled-components'
+import { space, layout, flexbox } from 'styled-system'
+import spaces from '../themes/spaces.js'
+import aligns, { flexRowAlign } from '../themes/aligns.js'
+import { contentFillHeight } from '../libraries/css.js'
 
-const Row = styled.div`
+const SdRow = styled.div`
 	display: flex;
-	${flexbox}
-	${color}
-  ${space}
+	${space}
+	${flexRowAlign}
 `
 
 const Div = ({ className, children }) => (
@@ -18,20 +18,14 @@ const Div = ({ className, children }) => (
 )
 
 // https://stackoverflow.com/questions/49745637/if-statement-inside-styled-component/49745933
-Row.Box = styled(Div)`
-	${flexbox}
+SdRow.Box = styled(Div)`
 	${space}
-  ${props => !props.isAligning && contentFillHeight}
+	${layout}
+  ${flexbox}
+  ${props => props.isAligning || contentFillHeight}
 `
 
-const verticalAlignMapping = {
-	default: '',
-	top: 'flex-start',
-	center: 'center',
-	bottom: 'flex-end',
-}
-
-const alignItemsAttrs = ['flex-start', 'center', 'flex-end']
+const aligningProps = ['top', 'center', 'bottom']
 
 const childMap = {
 	left: 'Left',
@@ -60,37 +54,36 @@ function RayoutFlexRow({
 	const remain = findChild(childMap.remain)
 	const right = findChild(childMap.right)
 
-	const alignItems = verticalAlignMapping[verticalAlign]
-	const isAligning = alignItemsAttrs.includes(alignItems)
+	const isAligning = aligningProps.includes(verticalAlign)
 
-	const margin = remain ? themeSpace[gap] : themeSpace[gap] / 2
+	const margin = remain ? spaces.space[gap] : spaces.space[gap] / 2
 	const marginRight = left ? margin : 0
 	const marginLeft = right ? margin : 0
 
 	return (
-		<Row
-			theme={theme}
+		<SdRow
+			theme={{ ...spaces, ...aligns }}
 			pt={paddingTop}
 			pb={paddingBottom}
 			pl={paddingLeft}
 			pr={paddingRight}
-			alignItems={verticalAlignMapping[verticalAlign]}
+			verticalAlign={verticalAlign}
 			{...rest}
 		>
-			<Row.Box
+			<SdRow.Box
 				isAligning={isAligning}
 				flex="0 0 auto"
 				mr={`${marginRight}px`}
 			>
 				{left}
-			</Row.Box>
-			<Row.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
+			</SdRow.Box>
+			<SdRow.Box isAligning={isAligning} flex="1 1 auto" minWidth={0}>
 				{remain}
-			</Row.Box>
-			<Row.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
+			</SdRow.Box>
+			<SdRow.Box isAligning={isAligning} flex="0 0 auto" ml={`${marginLeft}px`}>
 				{right}
-			</Row.Box>
-		</Row>
+			</SdRow.Box>
+		</SdRow>
 	)
 }
 

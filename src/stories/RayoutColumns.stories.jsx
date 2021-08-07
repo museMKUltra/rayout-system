@@ -66,7 +66,7 @@ TwentyElements.args = {
 	gapX: 5,
 	gapY: 5,
 	contentMinWidth: 0,
-	columnCount: 0,
+	columnCount: 6,
 	flowDirection: 'row',
 	verticalAlign: 'default',
 }

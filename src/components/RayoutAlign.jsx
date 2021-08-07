@@ -1,29 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
-import theme from '../configs/theme.js'
-import { space, flexbox } from 'styled-system'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { space } from 'styled-system'
+import spaces from '../themes/spaces.js'
+import aligns, { gridAlign } from '../themes/aligns.js'
 
-const horizontalAlignMapping = {
-	default: '',
-	left: 'start',
-	center: 'center',
-	right: 'end',
-}
-
-const verticalAlignMapping = {
-	default: '',
-	top: 'start',
-	center: 'center',
-	bottom: 'end',
-}
-
-const Container = styled.div`
+const SdContainer = styled.div`
 	display: grid;
 	grid-template-columns: minmax(0, auto);
 	box-sizing: border-box;
 	${space}
-  ${flexbox}
+	${gridAlign}
 `
 
 function RayoutAlign({
@@ -37,18 +24,18 @@ function RayoutAlign({
 	...rest
 }) {
 	return (
-		<Container
-			theme={theme}
+		<SdContainer
+			theme={{ ...spaces, ...aligns }}
 			pt={paddingTop}
 			pb={paddingBottom}
 			pl={paddingLeft}
 			pr={paddingRight}
-			justifyContent={horizontalAlignMapping[horizontalAlign]}
-			alignContent={verticalAlignMapping[verticalAlign]}
+			horizontalAlign={horizontalAlign}
+			verticalAlign={verticalAlign}
 			{...rest}
 		>
 			{children}
-		</Container>
+		</SdContainer>
 	)
 }
 

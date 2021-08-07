@@ -1,7 +1,7 @@
-const RAYOUT_SPACING_BASE = 4
-const RAYOUT_SPACING_TIMES = [0, 0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12]
+const SPACING_BASE = 4
+const SPACING_TIMES = [0, 0.5, 1, 2, 3, 4, 5, 6, 8, 10, 12]
 
-export const space = RAYOUT_SPACING_TIMES.map(times => times * RAYOUT_SPACING_BASE)
+export const space = SPACING_TIMES.map(times => times * SPACING_BASE)
 // 0, 2, 4, 8, 12, 16, 20, 24, 32, 40, 48
 
 // examples

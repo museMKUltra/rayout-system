@@ -1,36 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { color, flexbox, layout, space } from 'styled-system'
-import { contentFillHeight } from '../libraries/css.js'
-import theme, { space as themeSpace } from '../configs/theme.js'
 import { forEach } from 'lodash'
+import styled from 'styled-components'
+import { space, layout, flexbox } from 'styled-system'
+import spaces from '../themes/spaces.js'
+import aligns, { flexColumnAlign } from '../themes/aligns.js'
+import { contentFillHeight } from '../libraries/css.js'
 
-const Column = styled.div`
+const SdColumn = styled.div`
 	display: flex;
 	flex-direction: column;
-	${layout}
-	${flexbox}
-  ${color}
-  ${space}
+	${space}
+	${flexColumnAlign}
 `
 
 const Div = ({ className, children }) => (
 	<div className={className}>{children}</div>
 )
 
-Column.Box = styled(Div)`
-	${flexbox}
+SdColumn.Box = styled(Div)`
 	${space}
+	${layout}
+  ${flexbox}
   ${() => contentFillHeight}
 `
-
-const horizontalAlignMapping = {
-	default: '',
-	left: 'flex-start',
-	center: 'center',
-	right: 'flex-end',
-}
 
 const childMap = {
 	top: 'Top',
@@ -58,30 +51,30 @@ function RayoutFlexColumn({
 	const remain = findChild(childMap.remain)
 	const bottom = findChild(childMap.bottom)
 
-	const margin = remain ? themeSpace[gap] : themeSpace[gap] / 2
+	const margin = remain ? spaces.space[gap] : spaces.space[gap] / 2
 	const marginBottom = top ? margin : 0
 	const marginTop = bottom ? margin : 0
 
 	return (
-		<Column
-			theme={theme}
+		<SdColumn
+			theme={{ ...spaces, ...aligns }}
 			pt={paddingTop}
 			pb={paddingBottom}
 			pl={paddingLeft}
 			pr={paddingRight}
-			alignItems={horizontalAlignMapping[horizontalAlign]}
+			horizontalAlign={horizontalAlign}
 			{...rest}
 		>
-			<Column.Box flex="0 0 auto" mb={`${marginBottom}px`}>
+			<SdColumn.Box flex="0 0 auto" mb={`${marginBottom}px`}>
 				{top}
-			</Column.Box>
-			<Column.Box flex="1 1 auto" minHeight={0}>
+			</SdColumn.Box>
+			<SdColumn.Box flex="1 1 auto" minHeight={0}>
 				{remain}
-			</Column.Box>
-			<Column.Box flex="0 0 auto" mt={`${marginTop}px`}>
+			</SdColumn.Box>
+			<SdColumn.Box flex="0 0 auto" mt={`${marginTop}px`}>
 				{bottom}
-			</Column.Box>
-		</Column>
+			</SdColumn.Box>
+		</SdColumn>
 	)
 }
 
