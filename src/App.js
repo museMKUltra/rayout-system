@@ -5,10 +5,12 @@ import ExampleButton from './components/ExampleButton.jsx'
 import buttonTheme from './configs/button.js'
 import RayoutListInline from './components/RayoutListInline.jsx'
 import Example2 from './components/Example2.jsx'
+import Example1 from './components/Example1.jsx'
 
 function App() {
 	return (
 		<ThemeProvider theme={buttonTheme}>
+			<Example1 />
 			<Example2 />
 			<RayoutListInline
 				paddingTop={10}
