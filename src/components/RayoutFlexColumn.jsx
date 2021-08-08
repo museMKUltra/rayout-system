@@ -22,7 +22,7 @@ SdColumn.Box = styled(Div)`
 	${space}
 	${layout}
   ${flexbox}
-  ${() => contentFillHeight}
+  ${props => props.isRemain && contentFillHeight}
 `
 
 const childMap = {
@@ -68,7 +68,7 @@ function RayoutFlexColumn({
 			<SdColumn.Box flex="0 0 auto" mb={`${marginBottom}px`}>
 				{top}
 			</SdColumn.Box>
-			<SdColumn.Box flex="1 1 auto" minHeight={0}>
+			<SdColumn.Box flex="1 1 auto" minHeight={0} isRemain>
 				{remain}
 			</SdColumn.Box>
 			<SdColumn.Box flex="0 0 auto" mt={`${marginTop}px`}>
