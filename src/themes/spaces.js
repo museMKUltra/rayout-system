@@ -15,12 +15,24 @@ export const columns = system({
 	},
 })
 
-export const negativeMargin = system({
-	negativeMb: {
-		property: 'marginBottom',
+const halfTransform = (value, scale) => {
+	const half = value < 0 ? -0.5 : 0.5
+	const index = Math.abs(value)
+
+	return `${half * scale[index]}px`
+}
+
+export const halfMargin = system({
+	halfMx: {
+		properties: ['marginLeft', 'marginRight'],
 		scale: 'space',
-		transform: (value, scale) => `-${(scale[value])}px`
-	}
+		transform: halfTransform,
+	},
+	halfMy: {
+		properties: ['marginTop', 'marginBottom'],
+		scale: 'space',
+		transform: halfTransform,
+	},
 })
 
 const spaces = spaceGenerator()

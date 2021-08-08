@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import { layout, flexbox, space } from 'styled-system'
-import { spaceGenerator } from '../themes/spaces.js'
+import { spaceGenerator, halfMargin } from '../themes/spaces.js'
 import aligns, { flexRowAlign } from '../themes/aligns.js'
 
 const wrapMapping = {
@@ -18,14 +18,14 @@ const SdList = styled.div`
 SdList.Wrapper = styled.div`
 	display: inline-flex;
 	vertical-align: top;
-  ${space}
+	${halfMargin}
 	${layout}
-	${flexbox}
+  ${flexbox}
   ${flexRowAlign}
 `
 
 SdList.Item = styled.div`
-	${space}
+	${halfMargin}
 `
 
 // https://www.geeksforgeeks.org/how-to-use-react-cloneelement-function/
@@ -44,37 +44,31 @@ function RayoutListInline({
 	...rest
 }) {
 	const spaces = spaceGenerator(base)
-	const spaceMultiplier = times => number => times * spaces.space[number]
-	const positiveMargin = spaceMultiplier(0.5)
-	const negativeMargin = spaceMultiplier(-0.5)
 
 	return (
-		<SdList
-			theme={spaces}
-			pt={paddingTop}
-			pb={paddingBottom}
-			pl={paddingLeft}
-			pr={paddingRight}
-			{...rest}
-		>
-			<SdList.Wrapper
-				theme={aligns}
-				horizontalAlign={horizontalAlign}
-				verticalAlign={verticalAlign}
-				flexWrap={wrapMapping[wrap.toString()]}
-				mx={`${negativeMargin(gapX)}px`}
-				my={`${negativeMargin(gapY)}px`}
+		<ThemeProvider theme={{ ...spaces, ...aligns }}>
+			<SdList
+				pt={paddingTop}
+				pb={paddingBottom}
+				pl={paddingLeft}
+				pr={paddingRight}
+				{...rest}
 			>
-				{React.Children.map(children, child => (
-					<SdList.Item
-						mx={`${positiveMargin(gapX)}px`}
-						my={`${positiveMargin(gapY)}px`}
-					>
-						{React.cloneElement(child)}
-					</SdList.Item>
-				))}
-			</SdList.Wrapper>
-		</SdList>
+				<SdList.Wrapper
+					horizontalAlign={horizontalAlign}
+					verticalAlign={verticalAlign}
+					flexWrap={wrapMapping[wrap.toString()]}
+					halfMx={-gapX}
+					halfMy={-gapY}
+				>
+					{React.Children.map(children, child => (
+						<SdList.Item halfMx={gapX} halfMy={gapY}>
+							{React.cloneElement(child)}
+						</SdList.Item>
+					))}
+				</SdList.Wrapper>
+			</SdList>
+		</ThemeProvider>
 	)
 }
 

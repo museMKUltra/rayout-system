@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { grid, space } from 'styled-system'
 import styled, { ThemeProvider } from 'styled-components'
-import spaces, { columns, negativeMargin } from '../themes/spaces.js'
+import spaces, { columns } from '../themes/spaces.js'
 import aligns, { gridAlign } from '../themes/aligns.js'
 
 const SdColumns = styled.div`
-	overflow: hidden; // prevent pb 0 show mb of items
+  overflow: hidden; // prevent showing area of negative margin
 	${space}
 `
 
@@ -17,8 +17,8 @@ SdColumns.Row = styled.div`
 `
 
 SdColumns.Column = styled.div`
-	${columns}
-	${negativeMargin}
+  ${columns}
+	${space}
 `
 
 SdColumns.Item = styled.div`
@@ -74,7 +74,7 @@ function RayoutColumns({
 					<SdColumns.Column
 						columns={`${width} ${count}`}
 						columnGap={gapX}
-						negativeMb={gapY}
+						mb={-gapY}
 					>
 						{React.Children.map(children, child => (
 							<SdColumns.Item mb={gapY}>
