@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { grid, space } from 'styled-system'
 import styled, { ThemeProvider } from 'styled-components'
-import spaces from '../themes/spaces.js'
+import spaces, { columns, negativeMargin } from '../themes/spaces.js'
 import aligns, { gridAlign } from '../themes/aligns.js'
 
 const SdColumns = styled.div`
+	overflow: hidden; // prevent pb 0 show mb of items
 	${space}
 `
 
@@ -16,9 +17,8 @@ SdColumns.Row = styled.div`
 `
 
 SdColumns.Column = styled.div`
-	columns: ${props => props.columns};
-	column-gap: ${props => props.columnGap};
-	${space}
+	${columns}
+	${negativeMargin}
 `
 
 SdColumns.Item = styled.div`
@@ -63,8 +63,8 @@ function RayoutColumns({
 			>
 				{isRowDirection ? (
 					<SdColumns.Row
-						gridRowGap={gapX}
-						gridColumnGap={gapY}
+						gridRowGap={gapY}
+						gridColumnGap={gapX}
 						gridTemplateColumns={`repeat(${repeat}, minmax(${minmax}, 1fr))`}
 						verticalAlign={verticalAlign}
 					>
@@ -73,8 +73,8 @@ function RayoutColumns({
 				) : (
 					<SdColumns.Column
 						columns={`${width} ${count}`}
-						columnGap={`${spaces.space[gapX]}px`}
-						mb={`-${spaces.space[gapY]}px`}
+						columnGap={gapX}
+						negativeMb={gapY}
 					>
 						{React.Children.map(children, child => (
 							<SdColumns.Item mb={gapY}>
