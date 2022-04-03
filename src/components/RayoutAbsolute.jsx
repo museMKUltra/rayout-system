@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { forEach } from 'lodash'
 import styled from 'styled-components'
 import { space, flexbox } from 'styled-system'
 import spaces from '../themes/spaces.js'
@@ -41,7 +40,9 @@ const childMap = {
 	bottomRight: 'BottomRight',
 }
 
-forEach(childMap, type => (RayoutAbsolute[type] = type))
+Object.entries(childMap)
+	.forEach(([_key, value]) => RayoutAbsolute[value] = value)
+
 
 function RayoutAbsolute({
 	paddingTop,

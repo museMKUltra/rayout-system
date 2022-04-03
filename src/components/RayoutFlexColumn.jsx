@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { forEach } from 'lodash'
 import styled from 'styled-components'
 import { space, layout, flexbox } from 'styled-system'
 import spaces from '../themes/spaces.js'
@@ -31,7 +30,8 @@ const childMap = {
 	bottom: 'Bottom',
 }
 
-forEach(childMap, type => (RayoutFlexColumn[type] = type))
+Object.entries(childMap)
+	.forEach(([_key, value]) => RayoutFlexColumn[value] = value)
 
 function RayoutFlexColumn({
 	paddingTop,

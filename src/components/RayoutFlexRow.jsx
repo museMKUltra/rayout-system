@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { forEach } from 'lodash'
 import styled from 'styled-components'
 import { space, layout, flexbox } from 'styled-system'
 import spaces from '../themes/spaces.js'
@@ -33,7 +32,9 @@ const childMap = {
 	right: 'Right',
 }
 
-forEach(childMap, type => (RayoutFlexRow[type] = type))
+Object.entries(childMap)
+	.forEach(([_key, value]) => RayoutFlexRow[value] = value)
+
 
 // https://medium.com/@srph/react-imitating-vue-slots-eab8393f96fd
 function RayoutFlexRow({
