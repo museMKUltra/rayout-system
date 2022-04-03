@@ -8,6 +8,7 @@ const aligns = {
 const aliasSetter = key => (prop, index) => aligns[key][prop] = aligns[key][index]
 
 const flexAlignAlias = aliasSetter('flexAlign')
+aligns.flexAlign.default = aligns.flexAlign[0]
 flexAlignAlias('default', 0)
 flexAlignAlias('top', 1)
 flexAlignAlias('left', 1)

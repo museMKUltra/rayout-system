@@ -3,8 +3,6 @@ import styled from 'styled-components'
 
 const themeGetter = (key, style) => props => props.theme[key][props[key]][style]
 
-// color: ${props => props.theme.variant[props.variant].color};
-
 const SdButton = styled.button`
 	border-radius: 4px;
 	cursor: pointer;

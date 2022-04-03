@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space } from 'styled-system'
-import spaces from '../themes/spaces.js'
+import spaces, { multiPadding } from '../themes/spaces.js'
 import aligns, { gridAlign } from '../themes/aligns.js'
 
 const SdContainer = styled.div`
@@ -10,7 +10,8 @@ const SdContainer = styled.div`
 	grid-template-columns: minmax(0, auto);
 	box-sizing: border-box;
 	${space}
-	${gridAlign}
+	${multiPadding}
+  ${gridAlign}
 `
 
 function RayoutAlign({

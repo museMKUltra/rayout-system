@@ -1,28 +1,22 @@
 import styled from 'styled-components'
 
-const Button = styled.button`
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-	background: white;
+const Wrapper = styled.section`
+	padding: 4em;
+	background: papayawhip;
 `
 
-const TomatoButton = styled(Button)`
-  color: tomato;
-  border-color: tomato;
+const Title = styled.h1`
+	font-size: 1.5em;
+	text-align: center;
+	color: ${props => props.color};
 `
 
-// Extending Styles
-function Example3 () {
+function Example1() {
 	return (
-		<div>
-			<Button>Normal Button</Button>
-			<TomatoButton>Tomato Button</TomatoButton>
-		</div>
+		<Wrapper>
+			<Title color={'palevioletred'}>Hello World!3</Title>
+		</Wrapper>
 	)
 }
 
-export default Example3
+export default Example1

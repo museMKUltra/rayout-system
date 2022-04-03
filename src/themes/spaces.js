@@ -15,6 +15,21 @@ export const columns = system({
 	},
 })
 
+export const multiPadding = system({
+	paddings: {
+		property: 'padding',
+		scale: 'space',
+		transform: (value, scale) => {
+			const paddings = value
+				.split(' ')
+				.map(padding => `${scale[padding]}px`)
+				.join(' ')
+
+			return paddings
+		},
+	},
+})
+
 const halfTransform = (value, scale) => {
 	const half = value < 0 ? -0.5 : 0.5
 	const index = Math.abs(value)
