@@ -1,10 +1,10 @@
-import RayoutAlign from './components/RayoutAlign.jsx'
-import RayoutFlexColumn from './components/RayoutFlexColumn.jsx'
-import RayoutFlexRow from './components/RayoutFlexRow.jsx'
-import RayoutAbsolute from './components/RayoutAbsolute.jsx'
-import RayoutList from './components/RayoutList.jsx'
-import RayoutListInline from './components/RayoutListInline.jsx'
-import RayoutColumns from './components/RayoutColumns.jsx'
+import RayoutAlign from './components/RayoutAlign.js'
+import RayoutFlexColumn from './components/RayoutFlexColumn.js'
+import RayoutFlexRow from './components/RayoutFlexRow.js'
+import RayoutAbsolute from './components/RayoutAbsolute.js'
+import RayoutList from './components/RayoutList.js'
+import RayoutListInline from './components/RayoutListInline.js'
+import RayoutColumns from './components/RayoutColumns.js'
 
 export {
 	RayoutAlign,
